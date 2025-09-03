@@ -1,4 +1,4 @@
-name: Lint (ESLint + Prettier + Reviewdog)
+name: Lint & Format
 
 on:
   pull_request:
@@ -16,62 +16,28 @@ on:
       - "supabase/**"
   push:
     branches: [main]
-    paths:
-      - "**/*.js"
-      - "**/*.jsx"
-      - "**/*.ts"
-      - "**/*.tsx"
-      - "package.json"
-      - "package-lock.json"
-      - "app/**"
-      - "pages/**"
-      - "components/**"
-      - "lib/**"
-      - "supabase/**"
-
-permissions:
-  contents: read
-  pull-requests: write   # needed for PR comments
-  checks: write          # needed for GitHub Checks UI
 
 jobs:
-  eslint-reviewdog:
-    name: ESLint (reviewdog)
+  eslint:
+    name: ESLint
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-
-      - name: Use Node
-        uses: actions/setup-node@0a44ba784d80b4d3424f5b85bd98e655ab5a2c67 # v4.0.4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-
-      - name: Install deps
-        run: npm ci
-
-      # Run ESLint via Reviewdog (inline PR annotations + Checks UI)
-      - name: reviewdog / eslint
-        uses: reviewdog/action-eslint@2fee6ddc3f6e9b0a1b1e53b3e3b9b3a2a6b0c8c4 # v1.33.2 (pin SHA)
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-check    # or 'github-pr-review' for comments
-          eslint_flags: "--ext .js,.jsx,.ts,.tsx ."
-          fail_on_error: "true"        # make the job fail on ESLint errors
+      - run: npm ci
+      - run: npm run lint
 
   prettier:
-    name: Prettier (check)
+    name: Prettier check
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - name: Use Node
-        uses: actions/setup-node@0a44ba784d80b4d3424f5b85bd98e655ab5a2c67 # v4.0.4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-      - name: Install deps
-        run: npm ci
-      - name: Prettier check
-        run: npm run format:check
+      - run: npm ci
+      - run: npm run format:check
