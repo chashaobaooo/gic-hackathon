@@ -68,16 +68,19 @@ Before running the project, ensure you have the following installed:
 UV is a fast Python package installer and resolver. Install it using:
 
 **Windows (PowerShell):**
+
 ```powershell
 powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
 **macOS/Linux:**
+
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 **Alternative (using pip):**
+
 ```bash
 pip install uv
 ```
@@ -94,11 +97,13 @@ uv venv
 Activate the virtual environment:
 
 **Windows:**
+
 ```bash
 .venv\Scripts\activate
 ```
 
 **macOS/Linux:**
+
 ```bash
 source .venv/bin/activate
 ```
@@ -106,6 +111,7 @@ source .venv/bin/activate
 ### 3. Install Python Dependencies
 
 Install dependencies using UV (recommended):
+
 ```bash
 uv pip install -r requirements.txt
 ```
@@ -113,6 +119,7 @@ uv pip install -r requirements.txt
 ### 4. Install C++ Build Tools
 
 #### Windows
+
 1. Download and install **Visual Studio Build Tools 2022**:
    - Go to https://visualstudio.microsoft.com/downloads/
    - Download "Build Tools for Visual Studio 2022"
@@ -126,6 +133,7 @@ uv pip install -r requirements.txt
    - During installation, select "Add CMake to system PATH"
 
 #### macOS
+
 ```bash
 # Install Xcode command line tools
 xcode-select --install
@@ -135,6 +143,7 @@ brew install cmake
 ```
 
 #### Linux (Ubuntu/Debian)
+
 ```bash
 sudo apt-get update
 sudo apt-get install build-essential cmake
@@ -152,11 +161,13 @@ cmake ..
 ```
 
 **For Windows (using Visual Studio):**
+
 ```bash
 cmake --build . --config Release
 ```
 
 **For macOS/Linux:**
+
 ```bash
 make
 ```
@@ -166,35 +177,41 @@ make
 After successful compilation, copy the compiled library to the API directory:
 
 **Windows:**
+
 ```bash
 # From the cpp/build directory
 copy Release\risklib.cp311-win_amd64.pyd ..\api\
 ```
 
 **macOS/Linux:**
+
 ```bash
-# From the cpp/build directory  
+# From the cpp/build directory
 cp risklib*.so ../api/
 ```
 
 ### 7. Set Up Redis Server
 
 #### Using Docker (Recommended)
+
 ```bash
 docker run -d -p 6379:6379 --name redis redis:alpine
 ```
 
 #### Windows (Native Installation)
+
 1. Download Redis for Windows from https://github.com/microsoftarchive/redis/releases
 2. Extract and run `redis-server.exe`
 
 #### macOS
+
 ```bash
 brew install redis
 brew services start redis
 ```
 
 #### Linux
+
 ```bash
 sudo apt-get install redis-server
 sudo systemctl start redis-server
@@ -236,11 +253,13 @@ python main.py
 ```
 
 Or using uvicorn directly:
+
 ```bash
 uvicorn main:app --reload --host 127.0.0.1 --port 8000
 ```
 
 The API will be available at:
+
 - **API Base**: http://localhost:8000
 - **Interactive Documentation**: http://localhost:8000/docs
 - **ReDoc Documentation**: http://localhost:8000/redoc
@@ -248,11 +267,13 @@ The API will be available at:
 ### Testing the API
 
 #### Test Basic Endpoint
+
 ```bash
 curl http://localhost:8000/blah
 ```
 
 #### Test Volatility Calculation
+
 ```bash
 curl "http://localhost:8000/volatility?symbol=AAPL&start=2024-01-01&end=2024-12-31"
 ```
@@ -297,7 +318,7 @@ result = risklib.my_new_function([1.0, 2.0, 3.0])
 
 ### Common Issues
 
-1. **Import Error for risklib**: 
+1. **Import Error for risklib**:
    - Ensure the `.pyd` file is in the same directory as your Python scripts
    - Verify Python version matches the compiled extension
 
@@ -332,8 +353,8 @@ result = risklib.my_new_function([1.0, 2.0, 3.0])
 
 ```json
 {
-    "volatility": 0.045,
-    "cached": false
+  "volatility": 0.045,
+  "cached": false
 }
 ```
 
