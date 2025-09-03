@@ -15,9 +15,18 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 
-export default [
+const config = [
   // (optional but nice) ignores at the top
-  { ignores: [".next/**", "node_modules/**", "dist/**", "out/**", "supabase/types/**"] },
+  {
+    ignores: [
+      "next-env.d.ts",
+      ".next/**",
+      "node_modules/**",
+      "dist/**",
+      "out/**",
+      "supabase/types/**",
+    ],
+  },
 
   // spread the compat configs (avoid nested array)
   ...eslintConfig,
@@ -25,3 +34,5 @@ export default [
   // keep Prettier last so it can turn off conflicting rules
   eslintConfigPrettier,
 ];
+
+export default config;
