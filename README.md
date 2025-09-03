@@ -1,1 +1,1 @@
-# gic-hackathonT7
+# gic-hackathon
