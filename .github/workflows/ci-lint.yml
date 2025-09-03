@@ -14,8 +14,22 @@ on:
       - "components/**"
       - "lib/**"
       - "supabase/**"
+      - "!challenge1/**"
   push:
     branches: [main]
+    paths:
+      - "**/*.js"
+      - "**/*.jsx"
+      - "**/*.ts"
+      - "**/*.tsx"
+      - "package.json"
+      - "package-lock.json"
+      - "app/**"
+      - "pages/**"
+      - "components/**"
+      - "lib/**"
+      - "supabase/**"
+      - "!challenge1/**"
 
 jobs:
   eslint:
