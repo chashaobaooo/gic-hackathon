@@ -9,6 +9,8 @@ REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
 
 r = None
 
+## Note to self: might be good to add in in-memory caching for super hot data
+
 async def get_redis():
     global r
     if r is None:

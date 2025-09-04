@@ -1,3 +1,4 @@
+import time
 from supabase import create_client
 import os
 from dotenv import load_dotenv
@@ -27,3 +28,25 @@ async def fetch_data(symbol: str, start: str, end: str):
     )
 
     return response.data
+
+
+### Another method to call supabase that might be faster
+# import psycopg
+# def psycop_call(): #user_ids: list[str]):
+#     user="YOUR_SUPABASE_USER"
+#     password="YOUR_SUPABASE_PASSWORD"
+#     host="SUPABASE_HOST"
+#     port=5432
+#     database="postgres"
+#     with psycopg.connect(f"host={host} port={port} dbname={database} user={user} password={password}") as conn:
+#         # Open a cursor to perform database operations
+#         results = []
+#         with conn.cursor() as cur:
+#             start = time.time()
+#             # Execute a command: this creates a new table
+#             cur.execute("SELECT * FROM public.your_table_name")
+#             cur.fetchall()
+#             for record in cur:
+#                 results.append(record)
+#             stop = time.time()
+#             return (stop - start)
