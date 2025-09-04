@@ -263,6 +263,7 @@ The API will be available at:
 - **API Base**: http://localhost:8000
 - **Interactive Documentation**: http://localhost:8000/docs
 - **ReDoc Documentation**: http://localhost:8000/redoc
+- **OpenAPI JSON Schema**: http://localhost:8000/openapi.json
 
 ### Testing the API
 
